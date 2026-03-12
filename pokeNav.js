@@ -1,6 +1,6 @@
 const contenedor = document.getElementById("lista");
 
-const coloresTipo = {
+const coloresTipo = {// esto unicamente lo hice para el color de las cards no pude hacerlo en css
 fire:"#F08030",
 water:"#6890F0",
 grass:"#78C850",
@@ -23,7 +23,7 @@ dragon:"#7038F8",
 async function obtenerKanto() {
   try {
 
-    const response = await fetch("https://pokeapi.co/api/v2/generation/1");
+    const response = await fetch("https://pokeapi.co/api/v2/generation/1");//traemos la api 
     const data = await response.json();
 
     data.pokemon_species.sort((a, b) => {
@@ -64,6 +64,24 @@ async function obtenerKanto() {
       card.appendChild(nombrepoke);//agregamos el elemento p con el nombre del pokemon a la tarjeta
       card.appendChild(imagen);//agregamos el elemento img con la imagen del pokemon a la tarjeta
 
+      card.addEventListener("click", () =>{
+
+        const modal = document.getElementById("modalPokemon");
+        document.getElementById("nombrePokemon").textContent = poke.name;
+        document.getElementById("imagenPokemon").src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
+
+        document.getElementById("tiposPokemon").textContent = "Tipo: " + tipos;//mostramos los tipos del pokemon en el modal
+        
+        const stats=dataPokemon.stats
+          .map(s=> `${s.stat.name}: ${s.base_stat}`)
+          .join("<br>");
+
+          document.getElementById("statsPokemon").innerHTML= stats;//mostramos las estadisticas del pokemon en el modal
+          modal.style.display = "flex";//mostramos el modal
+
+        const sonido = new Audio(`https://play.pokemonshowdown.com/audio/cries/${poke.name}.mp3`);
+        sonido.play(); //cuando se hace click en la tarjeta, se reproduce el sonido del pokemon
+      })
       contenedor.appendChild(card);//agregamos la tarjeta completa al contenedor en el DOM para que se muestre en la pagina
 
     }
@@ -78,8 +96,12 @@ obtenerKanto();
 //Tengo que crear otra funcion para filtrar los pokemon por tipo y agregar un evento y constantes para los botones de filtrado.
 function mostrarTipo(tipo){//esta funcion se encarga de mostrar los pokemon que coincidan con el tipo seleccionado en el filtro, recibe como parametro el tipo que se desea mostrar
 
-  const mapa = document.getElementById("mapaKanto");
-  mapa.style.display = "none";
+const pokedex = document.getElementById("lista");//obtenemos el contenedor donde se van a mostrar los pokemon
+
+
+pokedex.style.display = "grid"; // vuelve a mostrar los pokemon
+
+
 const cards = document.querySelectorAll("#lista div");//obtenemos todas las tarjetas de pokemon que se encuentran dentro del contenedor con id "lista" para poder iterar sobre ellas y mostrar u ocultar segun el tipo seleccionado
 
 cards.forEach(card => {//iteramos sobre cada tarjeta de pokemon para verificar si su tipo coincide con el tipo seleccionado en el filtro
@@ -100,3 +122,21 @@ card.style.display = "none";
 });
 
 }
+document.getElementById("cerrarModal").addEventListener("click", () => {//cuando se haga click en el boton con el id "cerrarModal", se ejecutara la funcion que ocultara el modal
+
+document.getElementById("modalPokemon").style.display = "none";//establecemos la propiedad display del elemento con el id "modalPokemon" a "none", lo que hace que se oculte el modal
+
+});
+const musica = document.getElementById("musicaKanto");//obtenemos el elemento con el id "musicaKanto" y lo guardamos en la variable musica
+const boton = document.getElementById("botonMusica");//obtenemos el elemento con el id "botonMusica" y lo guardamos en la variable boton
+
+boton.addEventListener("click", () => {//cuando se haga click en el boton, se ejecutara la funcion que cambiara el estado de la musica
+if(musica.paused){
+    musica.play();
+    boton.textContent = "Pausar Música";
+}else{
+    musica.pause();
+    boton.textContent = "Reproducir Música";
+}
+
+});

@@ -7,6 +7,7 @@
 <title>Pokedex Kanto</title>
 
 <link rel="stylesheet" href="pokeNav.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 
 </head>
 
@@ -16,10 +17,16 @@
 <h1>Pokedex Kanto</h1>
 </header>
 
+
 <div class="layout">
 
 <div class="mapa">
-<img src="kanto-map.png" id="mapaKanto" alt="Mapa de Kanto">
+<img src="Mapa_de_Kanto_señalizado_RFVH.png"><img>
+<audio id="musicaKanto" loop>
+<source src="1-10. Pokémon Center.mp3" type="audio/mpeg">
+</audio>
+
+<button id="botonMusica">Play</button>
 </div>
 
 <div class="controles">
@@ -39,7 +46,23 @@
 </div>
 
 <div class="pokedex" id="lista"></div>
+<div id="modalPokemon" class="modal">
 
+  <div class="modal-contenido">
+
+    <span id="cerrarModal">✖</span>
+
+    <h2 id="nombrePokemon"></h2>
+
+    <img id="imagenPokemon">
+
+    <p id="tiposPokemon"></p>
+
+    <div id="statsPokemon"></div>
+
+  </div>
+
+</div>
 </div>
 
 </div>
