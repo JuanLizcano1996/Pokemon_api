@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokedex Kanto</title>
+
+<link rel="stylesheet" href="pokeNav.css">
+
+</head>
+
+<body>
+
+<header>
+<h1>Pokedex Kanto</h1>
+</header>
+
+<div class="layout">
+
+<div class="mapa">
+<img src="kanto-map.png" id="mapaKanto" alt="Mapa de Kanto">
+</div>
+
+<div class="controles">
+
+<div class="filtros">
+
+<button onclick="mostrarTipo('all')">Todos</button>
+<button onclick="mostrarTipo('fire')">Fuego</button>
+<button onclick="mostrarTipo('water')">Agua</button>
+<button onclick="mostrarTipo('grass')">Planta</button>
+<button onclick="mostrarTipo('electric')">Eléctrico</button>
+<button onclick="mostrarTipo('psychic')">Psíquico</button>
+<button onclick="mostrarTipo('rock')">Roca</button>
+<button onclick="mostrarTipo('ground')">Tierra</button>
+<button onclick="mostrarTipo('poison')">Veneno</button>
+
+</div>
+
+<div class="pokedex" id="lista"></div>
+
+</div>
+
+</div>
+
+<script src="pokeNav.js"></script>
+
+</body>
+</html>
